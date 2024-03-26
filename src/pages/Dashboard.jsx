@@ -1,12 +1,21 @@
-import { Link } from "react-router-dom"
 import TransactionsTable from "../components/TransactionsTable"
+import BalanceCard from "../components/BalanceCard"
+import { Grid } from "@mui/material"
 
 const Dashboard = () => {
   return (
-    <div>
-      <h1>Dashboard <Link to="/logout">Logout</Link></h1>
-      <TransactionsTable />
-    </div>
+    <Grid container spacing={2}>
+      <Grid item xs={4}>
+        <TransactionsTable type={2} />
+      </Grid>
+      <Grid item xs={4}>
+        <TransactionsTable type={1} />
+      </Grid>
+      <Grid item xs={3}>
+        <BalanceCard />
+      </Grid>
+    </Grid>
+
   )
 }
 

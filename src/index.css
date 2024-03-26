@@ -4,6 +4,7 @@
 
 body {
   margin: 0;
+  background-color: #747bff;
 }
 
 @media (prefers-color-scheme: light) {
