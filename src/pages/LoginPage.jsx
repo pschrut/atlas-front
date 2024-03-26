@@ -5,12 +5,12 @@ import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import Container from "@mui/material/Container"
 import { useNavigate } from "react-router-dom"
-import { useAuth } from "../context/AuthContext"
 import axiosInstance from "../../axiosConfig"
+import { useEffect } from "react"
+import { checkSession } from "../services/user"
 
 const LoginPage = () => {
   const navigate = useNavigate()
-  const { login } = useAuth()
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -19,7 +19,6 @@ const LoginPage = () => {
     try {
       const response = await axiosInstance.postForm("/login", data)
       if (response.status === 200) {
-        login()
         return navigate("/dashboard")
       } else {
         alert("Login failed")
@@ -28,6 +27,14 @@ const LoginPage = () => {
       console.error(e)
     }
   }
+
+  useEffect(() => {
+    checkSession((isAuthenticated) => {
+      if (isAuthenticated) {
+        navigate("/dashboard")
+      }
+    })
+  }, [])
 
   return (
     <Container component="main" maxWidth="xs">
