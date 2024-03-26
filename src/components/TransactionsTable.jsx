@@ -16,7 +16,7 @@ function TransactionsTable() {
         .then(data => {
           setTransactions(data.txs)
         }).catch(error => {
-          alert("There was an error!", error)
+          console.log("There was an error!", error)
         })
   }, [])
 

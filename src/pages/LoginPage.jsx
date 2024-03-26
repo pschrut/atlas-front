@@ -6,28 +6,27 @@ import Typography from "@mui/material/Typography"
 import Container from "@mui/material/Container"
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
+import axiosInstance from "../../axiosConfig"
 
 const LoginPage = () => {
   const navigate = useNavigate()
-  const { login } = useAuth();
+  const { login } = useAuth()
 
   const handleSubmit = async (event) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
-    await fetch("http://localhost:5000/login", {
-      method: "POST",
-      body: data,
-      credentials: "include"
-    }).then(response => {
-      if (response.ok) {
+
+    try {
+      const response = await axiosInstance.postForm("/login", data)
+      if (response.status === 200) {
         login()
         return navigate("/dashboard")
       } else {
         alert("Login failed")
       }
-    }).catch(error => {
-      alert("There was an error!", error)
-    })
+    } catch(e) {
+      console.error(e)
+    }
   }
 
   return (
