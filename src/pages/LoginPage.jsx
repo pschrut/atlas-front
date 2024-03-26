@@ -1,31 +1,34 @@
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { useNavigate } from "react-router-dom";
+import Button from "@mui/material/Button"
+import CssBaseline from "@mui/material/CssBaseline"
+import TextField from "@mui/material/TextField"
+import Box from "@mui/material/Box"
+import Typography from "@mui/material/Typography"
+import Container from "@mui/material/Container"
+import { useNavigate } from "react-router-dom"
+import { useAuth } from "../context/AuthContext"
 
-export default function LoginPage() {
-  const navigate = useNavigate();
+const LoginPage = () => {
+  const navigate = useNavigate()
+  const { login } = useAuth();
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    await fetch('http://localhost:5000/login', {
-      method: 'POST',
+    event.preventDefault()
+    const data = new FormData(event.currentTarget)
+    await fetch("http://localhost:5000/login", {
+      method: "POST",
       body: data,
-      credentials: 'include'
+      credentials: "include"
     }).then(response => {
       if (response.ok) {
-        return navigate('/dashboard');
+        login()
+        return navigate("/dashboard")
       } else {
-        alert('Login failed');
+        alert("Login failed")
       }
     }).catch(error => {
-      alert('There was an error!', error);
+      alert("There was an error!", error)
     })
-  };
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -33,9 +36,9 @@ export default function LoginPage() {
       <Box
         sx={{
           marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
         }}
       >
         <Typography component="h1" variant="h5">
@@ -75,3 +78,5 @@ export default function LoginPage() {
     </Container>
   )
 }
+
+export default LoginPage
