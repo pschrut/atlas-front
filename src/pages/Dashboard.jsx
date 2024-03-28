@@ -1,21 +1,26 @@
 import TransactionsTable from "../components/TransactionsTable"
 import BalanceCard from "../components/BalanceCard"
-import { Grid } from "@mui/material"
+import { Box, Container, Grid } from "@mui/material"
+import Header from "../components/Header"
 
 const Dashboard = () => {
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={4}>
-        <TransactionsTable type={2} />
+    <Box>
+    <Grid container spacing={2} justifyContent="center">
+        <Grid item xs={11.4}>
+          <Header />
+        </Grid>
+        <Grid item xs={4.7}>
+          <TransactionsTable type={2} />
+        </Grid>
+        <Grid item xs={4.7}>
+          <TransactionsTable type={1} />
+        </Grid>
+        <Grid item xs={2}>
+          <BalanceCard />
+        </Grid>
       </Grid>
-      <Grid item xs={4}>
-        <TransactionsTable type={1} />
-      </Grid>
-      <Grid item xs={3}>
-        <BalanceCard />
-      </Grid>
-    </Grid>
-
+    </Box>
   )
 }
 

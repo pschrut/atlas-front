@@ -9,21 +9,29 @@ import { useEffect, useState } from "react"
 import { convertToCurrency } from "../utils"
 import axiosInstance from "../../axiosConfig"
 import { formatDate } from "../utils"
+import useTransactionsStore from "../stores/useTransactionsStore"
 
 function TransactionsTable({ type }) {
-  const [transactions, setTransactions] = useState([])
+  const setBalanceIn = useTransactionsStore(state => state.setBalanceIn);
+  const setBalanceOut = useTransactionsStore(state => state.setBalanceOut);
+  const balanceIn = useTransactionsStore(state => state.balanceIn);
+  const balanceOut = useTransactionsStore(state => state.balanceOut);
+
+  const transactions = type === 1 ? balanceOut : balanceIn;
 
   useEffect(() => {
-      axiosInstance.get(`transactions?type=${type}&period_id=0324`).then((response) => {
-        setTransactions(response.data.txs)
-      })
-  }, [])
-
-
+    axiosInstance.get(`transactions?type=${type}`).then((response) => {
+      if (type === 1) {
+        setBalanceOut(response.data.txs);
+      } else {
+        setBalanceIn(response.data.txs);
+      }
+    });
+  }, []);
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ maxWidth: 650 }} size="small" aria-label="a dense table">
+    <TableContainer component={Paper} elevation={5}>
+      <Table size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>

@@ -16,7 +16,7 @@ const BalanceCard = () => {
   }, [])
 
   return (
-    <Card>
+    <Card elevation={5}>
       <CardContent>
         <Typography variant="h5" component="div">
           Balance
