@@ -1,12 +1,12 @@
-import TransactionsTable from "../components/TransactionsTable"
-import BalanceCard from "../components/BalanceCard"
-import { Box, Container, Grid } from "@mui/material"
-import Header from "../components/Header"
+import TransactionsTable from '../components/TransactionsTable';
+import BalanceCard from '../components/BalanceCard';
+import { Box, Container, Grid } from '@mui/material';
+import Header from '../components/Header';
 
 const Dashboard = () => {
   return (
     <Box>
-    <Grid container spacing={2} justifyContent="center">
+      <Grid container spacing={2} justifyContent='center'>
         <Grid item xs={11.4}>
           <Header />
         </Grid>
@@ -21,7 +21,7 @@ const Dashboard = () => {
         </Grid>
       </Grid>
     </Box>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;
