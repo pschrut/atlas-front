@@ -7,21 +7,19 @@ import Container from "@mui/material/Container";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../axiosConfig";
 import { checkSession } from "../services/user";
+import useUserStore from "../stores/useUserStore";
 
 export default function LoginPage() {
   const navigate = useNavigate();
+  const { login, setUser } = useUserStore();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
     try {
-      const response = await axiosInstance.postForm("/login", data);
-      if (response.status === 200) {
-        return navigate("/dashboard");
-      } else {
-        alert("Login failed");
-      }
+      await login(data)
+      return navigate("/dashboard");
     } catch (e) {
       console.error(e);
     }
@@ -31,6 +29,8 @@ export default function LoginPage() {
     checkSession((isAuthenticated) => {
       if (isAuthenticated) {
         navigate("/dashboard");
+      } else {
+        setUser(null);
       }
     });
   }, []);

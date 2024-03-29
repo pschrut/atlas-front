@@ -8,15 +8,26 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import Divider from "@mui/material/Divider";
 import axiosInstance from "../../axiosConfig";
 import useTransactionsStore from "../stores/useTransactionsStore";
+import useUserStore from "../stores/useUserStore";
+import { useNavigate } from "react-router-dom";
+import { Typography } from "@mui/material";
 
 function Header() {
   const fileInputRef = useRef(null);
   const { renewData } = useTransactionsStore();
+  const user = useUserStore((state) => state.user);
+  const { logout } = useUserStore();
+  const navigate = useNavigate();
   const handleFileInputClick = () => fileInputRef.current.click();
 
   const handleFileChange = (event) => {
     const files = event.target.files;
     uploadTransactions(files);
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/login");
   };
 
   const uploadTransactions = async (files) => {
@@ -45,7 +56,9 @@ function Header() {
       }}
     >
       <Toolbar>
-        <div style={{ flexGrow: 1 }} />
+        <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+          {user && user.username}
+        </Typography>
         <IconButton onClick={handleFileInputClick} color="inherit">
           <FileUploadIcon />
         </IconButton>
@@ -53,7 +66,7 @@ function Header() {
           <PeopleAltIcon />
         </IconButton>
         <Divider orientation="vertical" variant="middle" flexItem />
-        <IconButton color="inherit">
+        <IconButton color="inherit" onClick={handleLogout}>
           <LogoutIcon />
         </IconButton>
         <input
