@@ -9,11 +9,11 @@ import { useEffect } from "react";
 import { convertToCurrency } from "../utils";
 import { formatDate } from "../utils";
 import useTransactionsStore from "../stores/useTransactionsStore";
+import { Typography } from "@mui/material";
+import FunctionsIcon from "@mui/icons-material/Functions";
 
-export default function TransactionsTable({ type }) {
-  const transactions = useTransactionsStore(
-    (state) => state.transactions[type]
-  );
+export default function TransactionsTable({ type, rowColor }) {
+  const transactions = useTransactionsStore((state) => state.transactions);
   const { fetchData } = useTransactionsStore();
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function TransactionsTable({ type }) {
 
   return (
     <TableContainer component={Paper} elevation={5}>
-      <Table size="small" aria-label="a dense table">
+      <Table size="small">
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
@@ -31,7 +31,7 @@ export default function TransactionsTable({ type }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {transactions.map((tx) => (
+          {transactions[type].txs.map((tx) => (
             <TableRow
               key={tx.id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -40,17 +40,29 @@ export default function TransactionsTable({ type }) {
               <TableCell component="th" scope="row">
                 {tx.description}
               </TableCell>
-              {tx.type === "1" ? (
-                <TableCell align="right" sx={{ color: "red" }}>
-                  {convertToCurrency(tx.value)}
-                </TableCell>
-              ) : (
-                <TableCell align="right" sx={{ color: "green" }}>
-                  {convertToCurrency(tx.value)}
-                </TableCell>
-              )}
+              <TableCell align="right" sx={{ color: rowColor }}>
+                {convertToCurrency(tx.value)}
+              </TableCell>
             </TableRow>
           ))}
+          <TableRow sx={{ "& > *": { borderTop: 2 } }}>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
+            <TableCell align="right">
+              <Typography
+                variant="p"
+                color={rowColor}
+                fontWeight="bolder"
+                fontSize={16}
+              >
+                <FunctionsIcon
+                  fontSize="small"
+                  sx={{ position: "relative", top: 4 }}
+                />
+                {convertToCurrency(transactions[type].total)}
+              </Typography>
+            </TableCell>
+          </TableRow>
         </TableBody>
       </Table>
     </TableContainer>

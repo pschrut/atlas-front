@@ -11,10 +11,13 @@ import useTransactionsStore from "../stores/useTransactionsStore";
 import useUserStore from "../stores/useUserStore";
 import { useNavigate } from "react-router-dom";
 import { Typography } from "@mui/material";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
+import Box from "@mui/material/Box";
 
 function Header() {
   const fileInputRef = useRef(null);
-  const { renewData } = useTransactionsStore();
+  const { setIgnoreLowValues, renewData } = useTransactionsStore();
   const user = useUserStore((state) => state.user);
   const { logout } = useUserStore();
   const navigate = useNavigate();
@@ -28,6 +31,10 @@ function Header() {
   const handleLogout = async () => {
     await logout();
     navigate("/login");
+  };
+
+  const handleIgnoreLowValues = (e) => {
+    setIgnoreLowValues(e.target.checked);
   };
 
   const uploadTransactions = async (files) => {
@@ -56,9 +63,26 @@ function Header() {
       }}
     >
       <Toolbar>
-        <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+        <Typography variant="h5" component="div" sx={{flexGrow: 1}}>
           {user && user.username}
         </Typography>
+        <Box>
+          <FormControlLabel
+            value="hidelowvalues"
+            control={<Switch color="default" defaultChecked />}
+            label="Hide ints."
+            labelPlacement="start"
+            onChange={handleIgnoreLowValues}
+          />
+        </Box>
+        <Box sx={{ flexGrow: 1 }}>
+          <FormControlLabel
+            value="hideinvestments"
+            control={<Switch color="default" defaultChecked />}
+            label="Hide invs."
+            labelPlacement="start"
+          />
+        </Box>
         <IconButton onClick={handleFileInputClick} color="inherit">
           <FileUploadIcon />
         </IconButton>

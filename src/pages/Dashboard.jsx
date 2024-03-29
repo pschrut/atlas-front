@@ -12,7 +12,7 @@ export default function Dashboard() {
       <Grid container spacing={2} justifyContent="center">
         {Object.keys(transactions).map((type) => (
           <Grid item xs={12} lg={4} key={type}>
-            <TransactionsTable type={type} />
+            <TransactionsTable type={type} rowColor={type === "1" ? "red" : "green"} />
           </Grid>
         ))}
         <Grid item xs={6} lg={4}>
