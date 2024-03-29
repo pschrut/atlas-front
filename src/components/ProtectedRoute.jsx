@@ -1,19 +1,17 @@
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import { checkSession } from '../services/user';
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { checkSession } from "../services/user";
 
-const ProtectedRoute = ({ children }) => {
+export default function ProtectedRoute({ children }) {
   const navigate = useNavigate();
 
   useEffect(() => {
     checkSession((isAuthenticated) => {
       if (!isAuthenticated) {
-        navigate('/login', { replace: true });
+        navigate("/login", { replace: true });
       }
     });
   }, []);
 
   return children;
-};
-
-export default ProtectedRoute;
+}

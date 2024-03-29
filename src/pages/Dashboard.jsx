@@ -1,27 +1,24 @@
-import TransactionsTable from '../components/TransactionsTable';
-import BalanceCard from '../components/BalanceCard';
-import { Box, Container, Grid } from '@mui/material';
-import Header from '../components/Header';
+import TransactionsTable from "../components/TransactionsTable";
+import BalanceCard from "../components/BalanceCard";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import useTransactionsStore from "../stores/useTransactionsStore";
 
-const Dashboard = () => {
+export default function Dashboard() {
+  const transactions = useTransactionsStore((state) => state.transactions);
+
   return (
     <Box>
-      <Grid container spacing={2} justifyContent='center'>
-        <Grid item xs={11.4}>
-          <Header />
-        </Grid>
-        <Grid item xs={4.7}>
-          <TransactionsTable type={2} />
-        </Grid>
-        <Grid item xs={4.7}>
-          <TransactionsTable type={1} />
-        </Grid>
-        <Grid item xs={2}>
+      <Grid container spacing={2} justifyContent="center">
+        {Object.keys(transactions).map((type) => (
+          <Grid item xs={12} lg={4} key={type}>
+            <TransactionsTable type={type} />
+          </Grid>
+        ))}
+        <Grid item xs={6} lg={4}>
           <BalanceCard />
         </Grid>
       </Grid>
     </Box>
   );
-};
-
-export default Dashboard;
+}

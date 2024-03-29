@@ -1,27 +1,26 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LoginPage from './pages/LoginPage';
-import Dashboard from './pages/Dashboard';
-import ProtectedRoute from './components/ProtectedRoute';
-import Header from './components/Header';
-import { Box } from '@mui/system';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import Dashboard from "./pages/Dashboard";
+import Layout from "./components/Layout";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
     <Router>
-      <Box margin={2}>
-        <Routes>
-          <Route path='/' element={<LoginPage />} />
-          <Route path='/login' element={<LoginPage />} />
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/dashboard" element={<Layout />}>
           <Route
-            path='/dashboard'
+            index
             element={
               <ProtectedRoute>
                 <Dashboard />
               </ProtectedRoute>
             }
           />
-        </Routes>
-      </Box>
+        </Route>
+      </Routes>
     </Router>
   );
 }

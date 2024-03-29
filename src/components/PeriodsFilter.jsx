@@ -1,16 +1,19 @@
-import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 
-const PeriodsFilter = () => {
+export default function PeriodsFilter() {
   return (
-    <FormControl variant='standard' sx={{ ml: 5, minWidth: 120 }} size='small'>
-      <InputLabel id='demo-select-small-label'>Period</InputLabel>
+    <FormControl variant="standard" sx={{ ml: 5, minWidth: 120 }} size="small">
+      <InputLabel id="demo-select-small-label">Period</InputLabel>
       <Select
-        labelId='demo-select-small-label'
-        id='demo-select-small'
+        labelId="demo-select-small-label"
+        id="demo-select-small"
         value={1}
-        label='Period'
+        label="Period"
       >
-        <MenuItem value=''>
+        <MenuItem value="">
           <em>None</em>
         </MenuItem>
         <MenuItem value={10}>Ten</MenuItem>
@@ -19,6 +22,4 @@ const PeriodsFilter = () => {
       </Select>
     </FormControl>
   );
-};
-
-export default PeriodsFilter;
+}
