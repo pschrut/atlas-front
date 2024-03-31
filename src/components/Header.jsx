@@ -14,6 +14,7 @@ import { Typography } from "@mui/material";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import Box from "@mui/material/Box";
+import PeriodsFilter from "./PeriodsFilter";
 
 function Header() {
   const fileInputRef = useRef(null);
@@ -63,9 +64,12 @@ function Header() {
       }}
     >
       <Toolbar>
-        <Typography variant="h5" component="div" sx={{flexGrow: 1}}>
+        <Typography variant="h5" component="div">
           {user && user.username}
         </Typography>
+        <Box sx={{ ml: 3 }}>
+          <PeriodsFilter />
+        </Box>
         <Box>
           <FormControlLabel
             value="hidelowvalues"

@@ -14,11 +14,14 @@ import FunctionsIcon from "@mui/icons-material/Functions";
 
 export default function TransactionsTable({ type, rowColor }) {
   const transactions = useTransactionsStore((state) => state.transactions);
+  const periods = useTransactionsStore((state) => state.periods);
   const { fetchData } = useTransactionsStore();
 
   useEffect(() => {
-    fetchData(type);
-  }, []);
+    if (periods.length > 0) {
+      fetchData(type, periods[0]?.id);
+    }
+  }, [periods]);
 
   return (
     <TableContainer component={Paper} elevation={5}>
@@ -48,13 +51,8 @@ export default function TransactionsTable({ type, rowColor }) {
           <TableRow sx={{ "& > *": { borderTop: 2 } }}>
             <TableCell></TableCell>
             <TableCell></TableCell>
-            <TableCell align="right">
-              <Typography
-                variant="p"
-                color={rowColor}
-                fontWeight="bolder"
-                fontSize={16}
-              >
+            <TableCell align="right" width={160}>
+              <Typography variant="p" color={rowColor} fontSize={16}>
                 <FunctionsIcon
                   fontSize="small"
                   sx={{ position: "relative", top: 4 }}

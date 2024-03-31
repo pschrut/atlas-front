@@ -8,11 +8,14 @@ import useTransactionsStore from "../stores/useTransactionsStore";
 
 export default function BalanceCard() {
   const balance = useTransactionsStore((state) => state.balance);
+  const period = useTransactionsStore((state) => state.currentPeriod);
   const { fetchBalance } = useTransactionsStore();
 
   useEffect(() => {
-    fetchBalance();
-  }, []);
+    if (period.id) {
+      fetchBalance(period.id);
+    }
+  }, [period]);
 
   return (
     <Card sx={{ minWidth: 275, boxShadow: 3 }}>
