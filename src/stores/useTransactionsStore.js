@@ -65,6 +65,10 @@ const useTransactionsStore = create(
       }
     },
     renewData: async (period) => {
+      if (!period) {
+        await get().fetchPeriods();
+        period = get().currentPeriod.id;
+      }
       const types = Object.keys(get().transactions);
       for (let type of types) {
         await get().fetchData(type, period);

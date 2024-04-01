@@ -12,7 +12,7 @@ export default function BalanceCard() {
   const { fetchBalance } = useTransactionsStore();
 
   useEffect(() => {
-    if (period.id) {
+    if (period && period.id) {
       fetchBalance(period.id);
     }
   }, [period]);
@@ -23,19 +23,29 @@ export default function BalanceCard() {
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Financial Summary
         </Typography>
-        <Box display="flex" justifyContent="space-between" >
+        <Box display="flex" justifyContent="space-between">
           <Typography variant="h6" component="div">
             Total Incomes
           </Typography>
-          <Typography variant="h6" component="div" color="green">
+          <Typography
+            variant="h6"
+            component="div"
+            color="green"
+            fontWeight="normal"
+          >
             {convertToCurrency(balance.balance_in)}
           </Typography>
         </Box>
-        <Box display="flex" justifyContent="space-between" >
+        <Box display="flex" justifyContent="space-between">
           <Typography variant="h6" component="div">
             Total Outcomes
           </Typography>
-          <Typography variant="h6" component="div" color="red">
+          <Typography
+            variant="h6"
+            component="div"
+            color="red"
+            fontWeight="normal"
+          >
             {convertToCurrency(balance.balance_out)}
           </Typography>
         </Box>
@@ -56,8 +66,8 @@ export default function BalanceCard() {
           <Typography
             variant="h6"
             component="div"
-            fontWeight="fontWeightMedium"
             color="green"
+            fontWeight="normal"
           >
             {convertToCurrency(balance.io_balance)}
           </Typography>

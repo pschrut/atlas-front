@@ -61,7 +61,7 @@ export default function PeriodsFilter() {
         }}
       >
         <Typography flexGrow={1}>
-          {currentPeriod.description || periods[0]?.description}
+          {currentPeriod?.description || periods[0]?.description}
         </Typography>
         {open ? <ArrowDropDownIcon /> : <ArrowRightIcon />}
       </Button>
