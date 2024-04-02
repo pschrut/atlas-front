@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -68,7 +69,7 @@ function Header() {
       }}
     >
       <Toolbar>
-        <Typography variant="h5" component="div">
+        <Typography variant="h5" component={Link} to="/dashboard">
           {user && user.username}
         </Typography>
         <Box sx={{ ml: 3 }}>
@@ -94,7 +95,7 @@ function Header() {
         <IconButton onClick={handleFileInputClick} color="inherit">
           <FileUploadIcon />
         </IconButton>
-        <IconButton color="inherit">
+        <IconButton color="inherit" component={Link} to="/users">
           <PeopleAltIcon />
         </IconButton>
         <Divider orientation="vertical" variant="middle" flexItem />

@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import Dashboard from "./pages/Dashboard";
+import Users from "./pages/Users";
 import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -19,6 +20,18 @@ function App() {
               </ProtectedRoute>
             }
           />
+        </Route>
+        <Route path="/users" element={<Layout />}>
+            <Route
+              index
+              element={
+                <ProtectedRoute>
+                  <Users />
+                </ProtectedRoute>
+              }
+            >
+            
+            </Route>
         </Route>
       </Routes>
     </Router>
