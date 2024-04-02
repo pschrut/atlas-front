@@ -22,7 +22,11 @@ function Header() {
   const user = useUserStore((state) => state.user);
   const { logout } = useUserStore();
   const navigate = useNavigate();
-  const handleFileInputClick = () => fileInputRef.current.click();
+
+  const handleFileInputClick = () => {
+    fileInputRef.current.value = null;
+    fileInputRef.current.click();
+  }
 
   const handleFileChange = (event) => {
     const files = event.target.files;
@@ -44,7 +48,7 @@ function Header() {
       data.append("file", files[i]);
     }
     axiosInstance
-      .post("/upload_transactions", data, {
+      .post("upload_transactions", data, {
         headers: { "Content-Type": "multipart/form-data" },
       })
       .then((response) => {
