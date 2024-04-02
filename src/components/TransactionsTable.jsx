@@ -9,12 +9,16 @@ import { useEffect } from "react";
 import { convertToCurrency } from "../utils";
 import { formatDate } from "../utils";
 import useTransactionsStore from "../stores/useTransactionsStore";
-import { Typography } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 import FunctionsIcon from "@mui/icons-material/Functions";
 
 export default function TransactionsTable({ type, rowColor }) {
+  const theme = useTheme();
   const transactions = useTransactionsStore((state) => state.transactions);
   const periods = useTransactionsStore((state) => state.periods);
+  const isLargestScreen = useMediaQuery('(min-width:1441px)')
   const { fetchData } = useTransactionsStore();
 
   useEffect(() => {
@@ -41,7 +45,7 @@ export default function TransactionsTable({ type, rowColor }) {
             >
               <TableCell scope="row">{formatDate(tx.date)}</TableCell>
               <TableCell component="th" scope="row">
-                {tx.description.substring(0,17)}...
+                {isLargestScreen ? tx.description : `${tx.description.substring(0,17)}...`}
               </TableCell>
               <TableCell align="right" sx={{ color: rowColor }}>
                 {convertToCurrency(tx.value)}
