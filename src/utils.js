@@ -6,7 +6,6 @@ export const convertToCurrency = (number) =>
 
 export const formatDate = (date) => {
   const options = {
-    year: "numeric",
     month: "short",
     day: "numeric",
     timeZone: "UTC",
