@@ -41,7 +41,7 @@ export default function TransactionsTable({ type, rowColor }) {
             >
               <TableCell scope="row">{formatDate(tx.date)}</TableCell>
               <TableCell component="th" scope="row">
-                {tx.description}
+                {tx.description.substring(0,17)}...
               </TableCell>
               <TableCell align="right" sx={{ color: rowColor }}>
                 {convertToCurrency(tx.value)}

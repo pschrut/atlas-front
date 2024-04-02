@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Settings from "./Settings";
 
-function Header() {
+function Header({ page }) {
   const user = useUserStore((state) => state.user);
 
   return (
@@ -22,11 +22,16 @@ function Header() {
       }}
     >
       <Toolbar>
-        <Typography variant="h5" component={Link} to="/dashboard">
+        <Typography
+          variant="h5"
+          component={Link}
+          to="/dashboard"
+          sx={{ textDecoration: "none", color: "inherit" }}
+        >
           {user && user.username}
         </Typography>
         <Box sx={{ flexGrow: 1 }}>
-          <Filters />
+          { page === "dashboard" && <Filters /> }
         </Box>
         <Box>
           <Settings />
