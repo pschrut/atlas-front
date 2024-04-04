@@ -75,7 +75,7 @@ export default function TransactionsTable({ type, rowColor }) {
               <TableCell></TableCell>
               <TableCell
                 align="right"
-                width={160}
+                width={180}
                 style={{
                   position: "sticky",
                   bottom: 0,
