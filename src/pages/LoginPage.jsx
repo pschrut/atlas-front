@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../axiosConfig";
 import { checkSession } from "../services/user";
 import useUserStore from "../stores/useUserStore";
+import { Paper } from "@mui/material";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ export default function LoginPage() {
     const data = new FormData(event.currentTarget);
 
     try {
-      await login(data)
+      await login(data);
       return navigate("/dashboard");
     } catch (e) {
       console.error(e);
@@ -37,47 +38,47 @@ export default function LoginPage() {
 
   return (
     <Container component="main" maxWidth="xs">
-      <Box
-        sx={{
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="user"
-            label="User Name"
-            name="user"
-            autoComplete="username"
-            autoFocus
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+      <Box mt={8}>
+        <Paper elevation={5} sx={{p: 5}}>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
           >
-            Log In
-          </Button>
-        </Box>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="user"
+              label="User Name"
+              name="user"
+              autoComplete="username"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Log In
+            </Button>
+          </Box>
+        </Paper>
       </Box>
     </Container>
   );
