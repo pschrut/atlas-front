@@ -45,7 +45,6 @@ export default function PeriodsFilter() {
       sx={{
         height: 40,
         borderRadius: 2,
-        bgcolor: open ? "grey" : "inherit",
       }}
     >
       <Button

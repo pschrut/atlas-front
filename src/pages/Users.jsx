@@ -26,7 +26,7 @@ export default function Users() {
 
   return (
     <Grid container spacing={2}>
-      <Grid item md="6">
+      <Grid item md={6}>
         <TableContainer component={Paper} elevation={5}>
           <Table size="small">
             <TableHead>
@@ -34,6 +34,7 @@ export default function Users() {
                 <TableCell component="th">ID</TableCell>
                 <TableCell component="th">User Name</TableCell>
                 <TableCell component="th">Email</TableCell>
+                <TableCell component="th">Role</TableCell>
                 <TableCell component="th">Actions</TableCell>
               </TableRow>
             </TableHead>
@@ -44,6 +45,7 @@ export default function Users() {
                     <TableCell>{user.id}</TableCell>
                     <TableCell>{user.username}</TableCell>
                     <TableCell>{user.email}</TableCell>
+                    <TableCell>{user.role.name}</TableCell>
                     <TableCell>
                       <Edit /> <Delete />
                     </TableCell>
@@ -54,7 +56,7 @@ export default function Users() {
           </Table>
         </TableContainer>
       </Grid>
-      <Grid item md="6">
+      <Grid item md={6}>
         <Paper elevation={5}>
           <Box p={3}>
             <Typography component="h1" variant="h5">

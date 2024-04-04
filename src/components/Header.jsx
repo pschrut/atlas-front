@@ -34,7 +34,7 @@ function Header({ page }) {
           { page === "dashboard" && <Filters /> }
         </Box>
         <Box>
-          <Settings />
+          <Settings isAdmin={user && user.isAdmin} />
         </Box>
       </Toolbar>
     </AppBar>

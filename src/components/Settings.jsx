@@ -9,7 +9,7 @@ import { useRef } from "react";
 import useUserStore from "../stores/useUserStore";
 import useTransactionsStore from "../stores/useTransactionsStore";
 
-function Settings() {
+function Settings({ isAdmin }) {
   const fileInputRef = useRef(null);
   const { renewData } = useTransactionsStore();
   const { logout } = useUserStore();
@@ -47,9 +47,11 @@ function Settings() {
       <IconButton onClick={handleFileInputClick} color="inherit">
         <FileUploadIcon />
       </IconButton>
-      <IconButton color="inherit" component={Link} to="/users">
-        <PeopleAltIcon />
-      </IconButton>
+      {isAdmin && (
+        <IconButton color="inherit" component={Link} to="/users">
+          <PeopleAltIcon />
+        </IconButton>
+      )}
       <Divider orientation="vertical" variant="middle" flexItem />
       <IconButton color="inherit" onClick={handleLogout}>
         <LogoutIcon />

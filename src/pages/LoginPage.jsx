@@ -53,10 +53,10 @@ export default function LoginPage() {
               margin="normal"
               required
               fullWidth
-              id="user"
-              label="User Name"
-              name="user"
-              autoComplete="username"
+              id="email"
+              label="Email"
+              name="email"
+              autoComplete="email"
               autoFocus
             />
             <TextField
